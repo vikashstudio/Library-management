@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Members - Library System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/dashboard.html" class="nav-brand">📚 Library System</a>
+    <ul class="nav-links">
+      <li><a href="/dashboard.html">Dashboard</a></li>
+      <li><a href="/books.html">Books</a></li>
+      <li><a href="/members.html" class="active">Members</a></li>
+      <li><a href="/issue-return.html">Issue / Return</a></li>
+    </ul>
+    <div id="user-display"></div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <h1 style="color: var(--accent-color);">Library Members</h1>
+        <p style="color: var(--text-muted);">Manage registered library members</p>
+      </div>
+      <button id="btn-add-member" class="btn btn-primary" style="width: auto; display: none;" onclick="openAddMemberModal()">
+        + Register New Member
+      </button>
+    </div>
+
+    <div class="search-bar" style="margin-bottom: 1.5rem;">
+      <input type="text" id="member-search-input" class="form-control" placeholder="Search by name, email, phone, membership ID...">
+      <button class="btn btn-secondary" onclick="handleMemberSearch()">Search</button>
+      <button class="btn btn-secondary" onclick="loadMembers()">Reset</button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Membership ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="members-table-body">
+          <tr><td colspan="7" style="text-align: center;">Loading members...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Add/Edit Member Modal -->
+  <div id="member-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="member-modal-title" style="color: var(--accent-color);">Register Member</h3>
+        <button class="close-modal" onclick="closeMemberModal()">&times;</button>
+      </div>
+
+      <div id="member-modal-alert" class="alert"></div>
+
+      <form id="member-form" onsubmit="saveMember(event)">
+        <div class="form-group">
+          <label for="member-name">Full Name</label>
+          <input type="text" id="member-name" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="member-email">Email Address</label>
+          <input type="email" id="member-email" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="member-phone">Phone Number</label>
+          <input type="text" id="member-phone" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="member-id">Membership ID</label>
+          <input type="text" id="member-id" class="form-control" placeholder="e.g. MEM-1001" required>
+        </div>
+
+        <div class="form-group">
+          <label for="member-address">Address</label>
+          <input type="text" id="member-address" class="form-control" placeholder="Street, City">
+        </div>
+
+        <div class="form-group">
+          <label for="member-status">Status</label>
+          <select id="member-status" class="form-control">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeMemberModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="width: auto;">Save Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/members.js"></script>
+</body>
+</html>

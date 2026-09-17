@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue / Return - Library System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/dashboard.html" class="nav-brand">📚 Library System</a>
+    <ul class="nav-links">
+      <li><a href="/dashboard.html">Dashboard</a></li>
+      <li><a href="/books.html">Books</a></li>
+      <li><a href="/members.html">Members</a></li>
+      <li><a href="/issue-return.html" class="active">Issue / Return</a></li>
+    </ul>
+    <div id="user-display"></div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <h1 style="color: var(--accent-color);">Book Circulation</h1>
+        <p style="color: var(--text-muted);">Issue books to members or process book returns</p>
+      </div>
+      <button id="btn-issue-book" class="btn btn-primary" style="width: auto; display: none;" onclick="openIssueModal()">
+        + Issue New Book
+      </button>
+    </div>
+
+    <div class="search-bar" style="margin-bottom: 1.5rem; display: flex; gap: 1rem;">
+      <select id="status-filter" class="form-control" style="max-width: 200px;" onchange="loadIssues()">
+        <option value="">All Statuses</option>
+        <option value="issued">Currently Issued</option>
+        <option value="returned">Returned</option>
+      </select>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Book Title</th>
+            <th>Member Name</th>
+            <th>Issue Date</th>
+            <th>Due Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="issues-table-body">
+          <tr><td colspan="7" style="text-align: center;">Loading circulation records...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Issue Book Modal -->
+  <div id="issue-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="color: var(--accent-color);">Issue Book</h3>
+        <button class="close-modal" onclick="closeIssueModal()">&times;</button>
+      </div>
+
+      <div id="issue-modal-alert" class="alert"></div>
+
+      <form id="issue-form" onsubmit="saveIssue(event)">
+        <div class="form-group">
+          <label for="issue-book-select">Select Book (Available > 0)</label>
+          <select id="issue-book-select" class="form-control" required>
+            <option value="">Loading available books...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="issue-member-select">Select Member (Active)</label>
+          <select id="issue-member-select" class="form-control" required>
+            <option value="">Loading active members...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="issue-due-date">Due Date</label>
+          <input type="date" id="issue-due-date" class="form-control" required>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeIssueModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="width: auto;">Confirm Issue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/issue-return.js"></script>
+</body>
+</html>

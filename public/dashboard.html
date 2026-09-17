@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Library System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/dashboard.html" class="nav-brand">📚 Library System</a>
+    <ul class="nav-links">
+      <li><a href="/dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="/books.html">Books</a></li>
+      <li><a href="/members.html">Members</a></li>
+      <li><a href="/issue-return.html">Issue / Return</a></li>
+    </ul>
+    <div id="user-display"></div>
+  </nav>
+
+  <main class="container">
+    <div style="margin-bottom: 2rem;">
+      <h1 id="welcome-heading" style="color: var(--accent-color);">Welcome to Dashboard</h1>
+      <p style="color: var(--text-muted);">Overview of library inventory and circulation status.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span style="color: var(--text-muted); font-weight: 600;">Total Books</span>
+        <div class="number" id="stat-total-books">--</div>
+      </div>
+      <div class="stat-card">
+        <span style="color: var(--text-muted); font-weight: 600;">Available Books</span>
+        <div class="number" id="stat-available-books" style="color: var(--success-color);">--</div>
+      </div>
+      <div class="stat-card">
+        <span style="color: var(--text-muted); font-weight: 600;">Issued Books</span>
+        <div class="number" id="stat-issued-books" style="color: var(--warning-color);">--</div>
+      </div>
+      <div class="stat-card">
+        <span style="color: var(--text-muted); font-weight: 600;">Total Members</span>
+        <div class="number" id="stat-total-members" style="color: var(--accent-color);">--</div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="/books.html" class="btn btn-secondary" style="text-decoration: none;">📖 Manage Books</a>
+      <a href="/members.html" class="btn btn-secondary" style="text-decoration: none;">👥 Manage Members</a>
+      <a href="/issue-return.html" class="btn btn-primary" style="text-decoration: none; width: auto;">🔄 Issue / Return Book</a>
+    </div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

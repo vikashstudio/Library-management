@@ -1,0 +1,19 @@
+{
+  "name": "library-management-system",
+  "version": "1.0.0",
+  "description": "Library Management System using Node.js, Express, MongoDB, Vanilla JS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongodb": "^7.6.0",
+    "mongoose": "^8.3.1"
+  }
+}

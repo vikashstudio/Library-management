@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books - Library System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/dashboard.html" class="nav-brand">📚 Library System</a>
+    <ul class="nav-links">
+      <li><a href="/dashboard.html">Dashboard</a></li>
+      <li><a href="/books.html" class="active">Books</a></li>
+      <li><a href="/members.html">Members</a></li>
+      <li><a href="/issue-return.html">Issue / Return</a></li>
+    </ul>
+    <div id="user-display"></div>
+  </nav>
+
+  <main class="container">
+    <div class="page-header">
+      <div>
+        <h1 style="color: var(--accent-color);">Book Catalog</h1>
+        <p style="color: var(--text-muted);">Manage and search library books</p>
+      </div>
+      <button id="btn-add-book" class="btn btn-primary" style="width: auto; display: none;" onclick="openAddModal()">
+        + Add New Book
+      </button>
+    </div>
+
+    <div class="search-bar" style="margin-bottom: 1.5rem;">
+      <input type="text" id="search-input" class="form-control" placeholder="Search by title, author, ISBN, or category...">
+      <button class="btn btn-secondary" onclick="handleSearch()">Search</button>
+      <button class="btn btn-secondary" onclick="loadBooks()">Reset</button>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Category</th>
+            <th>Total Qty</th>
+            <th>Available</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="books-table-body">
+          <tr><td colspan="7" style="text-align: center;">Loading books...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Add/Edit Book Modal -->
+  <div id="book-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title" style="color: var(--accent-color);">Add Book</h3>
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+      </div>
+
+      <div id="modal-alert" class="alert"></div>
+
+      <form id="book-form" onsubmit="saveBook(event)">
+        <div class="form-group">
+          <label for="book-title">Title</label>
+          <input type="text" id="book-title" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="book-author">Author</label>
+          <input type="text" id="book-author" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="book-isbn">ISBN</label>
+          <input type="text" id="book-isbn" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="book-category">Category</label>
+          <input type="text" id="book-category" class="form-control" placeholder="e.g. Fiction, Science, Tech" required>
+        </div>
+
+        <div style="display: flex; gap: 1rem;">
+          <div class="form-group" style="flex: 1;">
+            <label for="book-quantity">Total Quantity</label>
+            <input type="number" id="book-quantity" class="form-control" min="0" required>
+          </div>
+          <div class="form-group" style="flex: 1;">
+            <label for="book-available">Available Qty</label>
+            <input type="number" id="book-available" class="form-control" min="0" required>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="width: auto;">Save Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/books.js"></script>
+</body>
+</html>
