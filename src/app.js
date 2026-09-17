@@ -15,14 +15,16 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Express Session Middleware
+// Express Session Middleware with fallback mongoUrl
+const mongoUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/library_db';
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || 'supersecretlibrarykey123',
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI,
+      mongoUrl: mongoUrl,
       collectionName: 'sessions'
     }),
     cookie: {
